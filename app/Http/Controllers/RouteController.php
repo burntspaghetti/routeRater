@@ -10,7 +10,9 @@ use App\Http\Requests\RouteRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Intervention\Image\Response;
 
 class RouteController extends Controller
 {
@@ -49,9 +51,11 @@ class RouteController extends Controller
         $route->user_id = $request->user()->id;
         $route->approved = 'No';
         $route->save();
-        $path = storage_path() . "/routes/" . $route->id . ".jpg";
+        $path = public_path() . "/routes/" . $route->id . ".jpg";
 
         Image::make($request->image)->orientate()->encode('jpg')->save($path);
+        $route->image_path = $path;
+        $route->save();
 
 
         return redirect()->action('HomeController@home');
@@ -67,7 +71,7 @@ class RouteController extends Controller
     {
         $route = \App\Route::find($id);
         $creator = User::find($route->user_id);
-        $rating = Rating::where('user_id', $route->user_id)->where('route_id', $id)->first();
+        $rating = Rating::where('user_id', Auth::user()->id)->where('route_id', $id)->first();
 
         return view('route', compact('route', 'creator', 'rating'));
     }
@@ -86,5 +90,30 @@ class RouteController extends Controller
         $route->approved = 'No';
         $route->save();
         return redirect()->action('HomeController@home');
+    }
+
+    public function downloadWall()
+    {
+        //PDF file is stored under project/public/download/info.pdf
+        $file= public_path(). "/example.jpg";
+
+        $headers = array(
+            'Content-Type', 'image/jpeg',
+        );
+
+        return response()->download($file, 'wall.jpg', $headers);
+    }
+
+    public function downloadRoute($id)
+    {
+        $route = \App\Route::find($id);
+        //PDF file is stored under project/public/download/info.pdf
+        $file= $route->image_path;
+
+        $headers = array(
+            'Content-Type', 'image/jpeg',
+        );
+
+        return response()->download($file, $route->name . '.jpg', $headers);
     }
 }

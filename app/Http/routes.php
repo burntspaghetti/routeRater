@@ -15,6 +15,8 @@
 Route::get('/', 'HomeController@home');
 Route::get('/route/{id}', 'RouteController@route');
 Route::post('/rateRoute/{id}', 'RatingController@rateRoute');
+Route::get('/downloadWall', 'RouteController@downloadWall');
+Route::get('/downloadRoute/{id}', 'RouteController@downloadRoute');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

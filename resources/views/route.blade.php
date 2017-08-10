@@ -17,8 +17,12 @@
                                     <h3>Rating: Not yet rated</h3>
                                 @else
                                     <h3>Rating: {!! $route->rating !!}</h3>
-
                                 @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{!! action('RouteController@downloadRoute', [$route->id]) !!}">Click here to download a photo of the route</a>
                             </div>
                         </div>
                         {!! Form::open([ 'action' => 'RatingController@rateRoute', 'class' => 'clearfix', 'style' => 'padding:1em 3em;']) !!}

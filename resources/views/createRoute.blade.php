@@ -20,6 +20,9 @@
                                 </div>
 
                             <div class="form-group">
+                                <a href="{!! action('RouteController@downloadWall') !!}">Click here to download a stock photo of the wall.</a>
+                                <br>
+                                {!! Form::label('image', 'Route Image: ') !!}
                                 {!! Form::file('image') !!}
                                 {!! $errors->first('image', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
                             </div>
@@ -40,12 +43,6 @@
                                 {!! Form::textarea('comments', null, array('class' => 'form-control btn btn-default')   ) !!}
                                 {!! $errors->first('comments', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
                             </div>
-
-
-
-
-
-
                             <button class="btn btn-success" type="submit">Submit</button>
                             <a href="{!! action('HomeController@home') !!}" class="btn btn-danger">Cancel</a>
 

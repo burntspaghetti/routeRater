@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/home', 'HomeController@home');
+Route::get('/', 'HomeController@home');
 Route::get('/route/{id}', 'RouteController@route');
 Route::post('/rateRoute/{id}', 'RatingController@rateRoute');
 
@@ -27,3 +27,6 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::post('/storeRoute', 'RouteController@storeRoute') ;
 Route::get('/createRoute', 'RouteController@createRoute');
+
+Route::get('/approve/{id}', 'RouteController@approve');
+Route::get('/remove/{id}', 'RouteController@remove');

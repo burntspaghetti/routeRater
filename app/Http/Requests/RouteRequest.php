@@ -26,7 +26,7 @@ class RouteRequest extends Request
         return [
             'name' => 'required|max:255|unique:routes',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:10000',//max filesize is 10mb
-            'rating' => 'required'
+            'color' => 'required'
         ];
     }
 }

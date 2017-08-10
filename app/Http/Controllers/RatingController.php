@@ -35,7 +35,7 @@ class RatingController extends Controller
 
         $route = Route::find($request->route_id);
 
-        $ratings = Rating::where('route_id', $route->id);
+        $ratings = Rating::where('route_id', $route->id)->get();
         $totalScore = 0;
         $count = 0;
         foreach($ratings as $rat)
@@ -46,7 +46,11 @@ class RatingController extends Controller
 
         $averageScore = $totalScore / $count;
 
-        $route->
+        $route->rating_count = $count;
+        $route->rating = $averageScore;
+        $route->save();
+
+        return redirect()->action('RouteController@route', [$route->id]);
     }
 
     /**

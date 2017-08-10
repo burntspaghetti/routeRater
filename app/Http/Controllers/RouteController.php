@@ -45,7 +45,7 @@ class RouteController extends Controller
         $route = new \App\Route();
         $route->name = $request->name;
         $route->comments = $request->comments;
-        $route->rating = $request->rating;
+        $route->color = $request->color;
         $route->user_id = $request->user()->id;
         $route->approved = 'No';
         $route->save();
@@ -67,42 +67,24 @@ class RouteController extends Controller
     {
         $route = \App\Route::find($id);
         $creator = User::find($route->user_id);
-        $rating = Rating::where('user_id', $route->user_id)->first();
-        
+        $rating = Rating::where('user_id', $route->user_id)->where('route_id', $id)->first();
+
         return view('route', compact('route', 'creator', 'rating'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function approve($id)
     {
-        //
+        $route = \App\Route::find($id);
+        $route->approved = 'Yes';
+        $route->save();
+        return redirect()->action('HomeController@home');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function remove($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $route = \App\Route::find($id);
+        $route->approved = 'No';
+        $route->save();
+        return redirect()->action('HomeController@home');
     }
 }

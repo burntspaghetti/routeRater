@@ -11,10 +11,14 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>{!! $route->name !!}</h1>
-                                <h2>{!! $route->rating !!}</h2>
-                                <h3>{!! $route->score !!}</h3>
-                                <h4>{!! $creator->name !!}</h4>
+                                <h1>Name: {!! $route->name !!}</h1>
+                                <h2>Color: {!! $route->color !!}</h2>
+                                @if(is_null($route->rating))
+                                    <h3>Rating: Not yet rated</h3>
+                                @else
+                                    <h3>Rating: {!! $route->rating !!}</h3>
+
+                                @endif
                             </div>
                         </div>
                         {!! Form::open([ 'action' => 'RatingController@rateRoute', 'class' => 'clearfix', 'style' => 'padding:1em 3em;']) !!}
@@ -48,7 +52,7 @@
                                 {!! Form::hidden('rating_id', $rating->id) !!}
                             @endif
                             {!! Form::hidden('route_id', $route->id) !!}
-                            <button class="btn btn-success" type="submit">Submit Rating</button>
+                            <button class="btn btn-success" type="submit">Submit Score</button>
 
                         {!! Form::close() !!}
                     </div>

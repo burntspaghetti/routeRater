@@ -27,10 +27,10 @@
                             <div class="form-group">
                                 {!! Form::label('color', 'Color:') !!}
                                 {!! Form::select('color', array('' => null,
-                                                                '1' => '1',
-                                                                '2' => '2',
-                                                                '3' => '3',
-                                                                '4' => '4',
+                                                                'Blue' => 'Blue',
+                                                                'White' => 'White',
+                                                                'Red' => 'Red',
+                                                                'Black' => 'Black',
                                                                 ), null, array('class' => 'form-control btn btn-default')) !!}
                                 {!! $errors->first('color', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
                             </div>

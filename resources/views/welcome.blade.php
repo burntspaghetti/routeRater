@@ -9,7 +9,12 @@
                     <div class="panel-heading">Welcome</div>
 
                     <div class="panel-body">
-                        Your Application's Landing Page.
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{!! action('RouteController@createRoute') !!}" class="btn btn-primary">Create Route</a>
+                            </div>
+
+                        </div>
                     </div>
                 @endif
             </div>

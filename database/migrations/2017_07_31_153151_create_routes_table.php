@@ -14,10 +14,10 @@ class CreateRoutesTable extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->string('comments');
-            $table->string('difficulty_rating_1');
-            $table->string('difficulty_rating_2');
+            $table->string('approved');
+            $table->string('rating');
             $table->string('name');
             $table->string('user_id')->foreign('user_id')->references('id')->on('users')->nullable();
             $table->timestamps();

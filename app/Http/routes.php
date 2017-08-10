@@ -13,6 +13,8 @@
 
 
 Route::get('/home', 'HomeController@home');
+Route::get('/route/{id}', 'RouteController@route');
+Route::post('/rateRoute/{id}', 'RatingController@rateRoute');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

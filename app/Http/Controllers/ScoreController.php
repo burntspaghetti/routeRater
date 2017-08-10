@@ -2,32 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Route;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class ScoreController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function index()
     {
-        //get all routes with ratings
-        $routes = Route::all();
-        
-        //better to the calc after it is saved, so that the calc is only done once each time it is updated
-        //create score attribute on route 
-        
-        //sum all ratings for the route
-        //divide by count of ratings
-        //= rate
-        //rate = 
-        return view('welcome', compact('routes'));
+        //
     }
 
     /**

@@ -25,14 +25,14 @@
                             </div>
                             <!--rating dropdown-->
                             <div class="form-group">
-                                {!! Form::label('rating', 'Rating:') !!}
-                                {!! Form::select('rating', array('' => null,
+                                {!! Form::label('color', 'Color:') !!}
+                                {!! Form::select('color', array('' => null,
                                                                 '1' => '1',
                                                                 '2' => '2',
                                                                 '3' => '3',
                                                                 '4' => '4',
                                                                 ), null, array('class' => 'form-control btn btn-default')) !!}
-                                {!! $errors->first('rating', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
+                                {!! $errors->first('color', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
                             </div>
                             <!--comments Form Input-->
                             <div class="form-group">

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Rating;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\RouteRequest;
 
@@ -52,25 +54,7 @@ class RouteController extends Controller
         Image::make($request->image)->orientate()->encode('jpg')->save($path);
 
 
-        dd('done');
-
-
-//        if(!file_exists($file))
-//        {
-//       // create temporary folder to store unmerged pdfs
-//          $tmp = mkdir($file, 0777, true);
-//        }
-//
-//
-        
-        //convert to png
-        //move file
-        //save name, comments, path
-        //return to home page
-
-        //return $file->move($this->unconvertedPDFsDir, $this->CWID . "_" . $uploadNum . "." . $format);
-
-
+        return redirect()->action('HomeController@home');
     }
 
     /**
@@ -79,9 +63,13 @@ class RouteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function route($id)
     {
-        //
+        $route = \App\Route::find($id);
+        $creator = User::find($route->user_id);
+        $rating = Rating::where('user_id', $route->user_id)->first();
+        
+        return view('route', compact('route', 'creator', 'rating'));
     }
 
     /**

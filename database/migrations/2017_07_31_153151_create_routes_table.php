@@ -17,7 +17,9 @@ class CreateRoutesTable extends Migration
             $table->string('image_path')->nullable();
             $table->string('comments');
             $table->string('approved');
-            $table->string('rating');
+            $table->string('color');
+            $table->string('rating')->nullable();
+            $table->string('rating_count')->nullable();
             $table->string('name');
             $table->string('user_id')->foreign('user_id')->references('id')->on('users')->nullable();
             $table->timestamps();

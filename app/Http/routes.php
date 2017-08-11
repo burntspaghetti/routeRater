@@ -11,12 +11,20 @@
 |
 */
 
+Route::group(array('middleware' => ['auth']), function()
+{
+    Route::get('/', 'HomeController@home');
+    Route::get('/route/{id}', 'RouteController@route');
+    Route::post('/rateRoute/{id}', 'RatingController@rateRoute');
+    Route::get('/downloadWall', 'RouteController@downloadWall');
+    Route::get('/downloadRoute/{id}', 'RouteController@downloadRoute');
+    Route::get('/editRequest/{creditRequestID}', 'RequestController@editRequest');
+    Route::post('/storeRoute', 'RouteController@storeRoute') ;
+    Route::get('/createRoute', 'RouteController@createRoute');
+    Route::get('/approve/{id}', 'RouteController@approve');
+    Route::get('/remove/{id}', 'RouteController@remove');
+});
 
-Route::get('/', 'HomeController@home');
-Route::get('/route/{id}', 'RouteController@route');
-Route::post('/rateRoute/{id}', 'RatingController@rateRoute');
-Route::get('/downloadWall', 'RouteController@downloadWall');
-Route::get('/downloadRoute/{id}', 'RouteController@downloadRoute');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -26,9 +34,3 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
-
-Route::post('/storeRoute', 'RouteController@storeRoute') ;
-Route::get('/createRoute', 'RouteController@createRoute');
-
-Route::get('/approve/{id}', 'RouteController@approve');
-Route::get('/remove/{id}', 'RouteController@remove');

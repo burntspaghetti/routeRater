@@ -15,7 +15,7 @@
                     <div class="col-md-12">
                         <h2>Routes</h2>
                         <p>Below you will find a list of all the routes. Click on the route name to view the route image and details.</p>
-
+                        <a href="{!! action('RouteController@createRoute') !!}" class="btn btn-default">Create Route</a>
                         <table id="example" class="table table-striped table-bordered datatables-example dataTable" cellspacing="0" width="100%" id="DataTables_Table_0" role="grid" aria-describedby="applications" style="width: 100%;">
                             <thead>
                             <tr role="row">
@@ -81,22 +81,30 @@
                                                         <div class="modal-body">
                                                             <a href="{!! action('RouteController@downloadRoute', [$route->id]) !!}" class="btn btn-primary">Download Image</a>
                                                             <hr />
-                                                            <h4>Color:</h4>
-                                                            <span class="badge">{!! $route->color !!}</span>
-                                                            <h4>Average Rating:</h4>
-                                                            @if(is_null($route->rating))
-                                                                <p>Not yet rated</p>
-                                                            @else
-                                                                <span class="badge">{!! $route->rating !!}</span>
-                                                            @endif
-                                                            <h4>Rating Count:</h4>
-                                                            @if(is_null($route->rating_count))
-                                                                <p>Not yet rated</p>
-                                                            @else
-                                                                <span class="badge">{!! $route->rating_count !!}</span>
-                                                            @endif
-                                                            <h4>Creator:</h4>
-                                                            <span class="badge">{!! $route->creator !!}</span>
+                                                            <h4>Color: <span class="badge">{!! $route->color !!}</span></h4>
+
+                                                            <h4>Average Rating:
+                                                                @if(is_null($route->rating))
+                                                                    <p>Not yet rated</p>
+                                                                @else
+                                                                    <span class="badge">{!! $route->rating !!}</span>
+                                                                @endif
+                                                            </h4>
+
+                                                            <h4>
+                                                                Rating Count:
+                                                                @if(is_null($route->rating_count))
+                                                                    <p>Not yet rated</p>
+                                                                @else
+                                                                    <span class="badge">{!! $route->rating_count !!}</span>
+                                                                @endif
+                                                            </h4>
+                                                            <h4>Comments:
+                                                                <span class="badge">{!! $route->comments !!}</span>
+                                                            </h4>
+                                                            <h4>Creator:
+                                                                <span class="badge">{!! $route->creator !!}</span>
+                                                            </h4>
                                                             <br>
                                                             <br>
                                                             <div class="row">

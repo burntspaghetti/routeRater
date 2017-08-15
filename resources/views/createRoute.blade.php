@@ -44,7 +44,7 @@
                                 {!! $errors->first('comments', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
                             </div>
                             <button class="btn btn-success" type="submit">Submit</button>
-                            <a href="{!! action('HomeController@home') !!}" class="btn btn-danger">Cancel</a>
+                            <a href="{!! action('RouteController@routes') !!}" class="btn btn-danger">Cancel</a>
 
                             {!! Form::close() !!}
 

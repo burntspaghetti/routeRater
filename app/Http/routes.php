@@ -13,7 +13,7 @@
 
 Route::group(array('middleware' => ['auth']), function()
 {
-    Route::get('/', 'HomeController@home');
+    Route::get('/', 'RouteController@routes');
     Route::get('/route/{id}', 'RouteController@route');
     Route::post('/rateRoute/{id}', 'RatingController@rateRoute');
     Route::get('/downloadWall', 'RouteController@downloadWall');

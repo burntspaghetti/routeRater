@@ -33,7 +33,29 @@
                                 @if(Auth::user()->role == 'user' && strtolower($route->approved) != 'no')
                                     <tr>
                                         <td>
-                                            <a href="{!! action('RouteController@route', [$route->id]) !!}">{!! $route->name !!}</a>
+                                            {{--<a href="{!! action('RouteController@route', [$route->id]) !!}">{!! $route->name !!}</a>--}}
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#{!! $route->id !!}">
+                                                Launch demo modal
+                                            </button>
+                                            {{--create modal here--}}
+                                                    <!-- Modal -->
+                                            <div class="modal fade" id="{!! $route->id !!}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            ...
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                         </td>
                                         <td>{!! $route->color !!}</td>
                                         <td>{!! $route->rating !!}</td>
@@ -42,7 +64,96 @@
                                 @elseif(Auth::user()->role == 'admin')
                                     <tr>
                                         <td>
-                                            <a href="{!! action('RouteController@route', [$route->id]) !!}">{!! $route->name !!}</a>
+                                            {{--<a href="{!! action('RouteController@route', [$route->id]) !!}">{!! $route->name !!}</a>--}}
+                                                    <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#{!! $route->id !!}">
+                                                {!! $route->name !!}
+                                            </button>
+                                            {{--create modal here--}}
+                                                    <!-- Modal -->
+                                            <div class="modal fade" id="{!! $route->id !!}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel">{!! $route->name !!}</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <a href="{!! action('RouteController@downloadRoute', [$route->id]) !!}" class="btn btn-primary">Download Image</a>
+                                                            <hr />
+                                                            <h4>Color:</h4>
+                                                            <span class="badge">{!! $route->color !!}</span>
+                                                            <h4>Average Rating:</h4>
+                                                            @if(is_null($route->rating))
+                                                                <p>Not yet rated</p>
+                                                            @else
+                                                                <span class="badge">{!! $route->rating !!}</span>
+                                                            @endif
+                                                            <h4>Rating Count:</h4>
+                                                            @if(is_null($route->rating_count))
+                                                                <p>Not yet rated</p>
+                                                            @else
+                                                                <span class="badge">{!! $route->rating_count !!}</span>
+                                                            @endif
+                                                            <h4>Creator:</h4>
+                                                            <span class="badge">{!! $route->creator !!}</span>
+                                                            <br>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-body">
+                                                                            {!! Form::open([ 'action' => 'RatingController@rateRoute', 'class' => '', 'style' => '']) !!}
+                                                                            <div class="row">
+                                                                                @if(is_null($route->currentUserScore))
+                                                                                    <div class="col-md-12">
+                                                                                        {!! Form::label('score', 'Your Rating:') !!}
+                                                                                        {!! Form::select('score', array('' => null,
+                                                                                                                        '1' => '1',
+                                                                                                                        '2' => '2',
+                                                                                                                        '3' => '3',
+                                                                                                                        '4' => '4',
+                                                                                                                        '5' => '5',
+                                                                                                                        ), null, array('class' => 'form-control btn btn-default')) !!}
+                                                                                        {!! $errors->first('score', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
+                                                                                    </div>
+                                                                                    {!! Form::hidden('insert', true) !!}
+                                                                                @else
+                                                                                    <div class="col-md-12">
+                                                                                        {!! Form::label('score', 'Your Rating:') !!}
+                                                                                        {!! Form::select('score', array('' => null,
+                                                                                                                        '1' => '1',
+                                                                                                                        '2' => '2',
+                                                                                                                        '3' => '3',
+                                                                                                                        '4' => '4',
+                                                                                                                        '5' => '5',
+                                                                                                                        ), $rating->score, array('class' => 'form-control btn btn-default')) !!}
+                                                                                        {!! $errors->first('score', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
+                                                                                    </div>
+                                                                                    {!! Form::hidden('update', true) !!}
+                                                                                    {!! Form::hidden('rating_id', $rating->id) !!}
+                                                                                @endif
+                                                                                {!! Form::hidden('route_id', $route->id) !!}
+                                                                            </div>
+                                                                            <br>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <button class="btn btn-success" type="submit">Submit Score</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            {!! Form::close() !!}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{--<div class="modal-footer">--}}
+                                                            {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+                                                            {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
+                                                        {{--</div>--}}
+                                                    </div>
+                                                </div>
                                         </td>
                                         <td>{!! $route->color !!}</td>
                                         <td>{!! $route->rating !!}</td>

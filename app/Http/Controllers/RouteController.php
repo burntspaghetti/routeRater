@@ -4,33 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Rating;
 use App\User;
+use App\Route;
 use Illuminate\Http\Request;
 use App\Http\Requests\RouteRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Routing\Route;
+//use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\Response;
 
 class RouteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function routes()
     {
-        //
-    }
+        //get all routes with ratings
+        $routes = Route::all();
+        foreach($routes as $route)
+        {
+            $creator = User::find($route->user_id);
+            $currentUserScore = Rating::where('user_id', Auth::user()->id)->where('route_id', $route->id)->first();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+            if(!is_null($creator))
+            {
+                $route->creator = $creator->name;
+            }
+            else
+            {
+                $route->creator = $creator->name;
+            }
+
+            if(!is_null($currentUserScore))
+            {
+                $route->currentUserRating = $currentUserScore->score;
+            }
+            else
+            {
+                $route->currentUserRating = null;
+            }
+        }
+
+        return view('welcome', compact('routes'));
+    }
+    
+    
     public function createRoute()
     {
         return view('createRoute');
@@ -57,8 +75,8 @@ class RouteController extends Controller
         $route->image_path = $path;
         $route->save();
 
-
-        return redirect()->action('HomeController@home');
+        $request->session()->flash('success', 'Route saved.');
+        return redirect()->action('RouteController@routes');
     }
 
     /**
@@ -81,7 +99,7 @@ class RouteController extends Controller
         $route = \App\Route::find($id);
         $route->approved = 'Yes';
         $route->save();
-        return redirect()->action('HomeController@home');
+        return redirect()->action('RouteController@routes');
     }
 
     public function remove($id)
@@ -89,7 +107,7 @@ class RouteController extends Controller
         $route = \App\Route::find($id);
         $route->approved = 'No';
         $route->save();
-        return redirect()->action('HomeController@home');
+        return redirect()->action('RouteController@routes');
     }
 
     public function downloadWall()

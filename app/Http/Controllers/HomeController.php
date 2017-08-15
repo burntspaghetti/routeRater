@@ -21,7 +21,9 @@ class HomeController extends Controller
 //        dd(Auth::user()->role);
 
         //get all routes with ratings
-        $routes = Route::all();
+        $routes = Route::all()->with(['ratings']);
+        $user = Auth::user();
+
         
         //better to the calc after it is saved, so that the calc is only done once each time it is updated
         //create score attribute on route 
@@ -32,6 +34,6 @@ class HomeController extends Controller
         //rate =
 //        dd($routes);
 
-        return view('welcome', compact('routes'));
+        return view('welcome', compact('routes', 'user'));
     }
 }

@@ -15,6 +15,7 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -44,7 +45,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{!! action('HomeController@home') !!}">
+                <a class="navbar-brand" href="{!! action('RouteController@routes') !!}">
                     routeRater
                 </a>
             </div>
@@ -58,7 +59,7 @@
                         <li><a href="{{ url('auth/login') }}">Login</a></li>
                         <li><a href="{{ url('auth/register') }}">Register</a></li>
                     @else
-                        <li><a href="{!! action('HomeController@home') !!}" class="">View Routes</a></li>
+                        <li><a href="{!! action('RouteController@routes') !!}" class="">View Routes</a></li>
                         <li><a href="{!! action('RouteController@createRoute') !!}" class="">Create Route</a></li>
                         <li><a href="{{ action('Auth\AuthController@getLogout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                     @endif
@@ -66,6 +67,13 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
 
     @yield('content')
 

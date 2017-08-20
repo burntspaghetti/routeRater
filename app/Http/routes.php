@@ -10,17 +10,22 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/test', function()
+{
+    dd(phpinfo());
+    
+});
+
 
 Route::group(array('middleware' => ['auth']), function()
 {
-    Route::get('/', 'RouteController@routes');
+    Route::get('/{color?}', 'RouteController@routes');
     Route::get('/route/{id}', 'RouteController@route');
     Route::post('/rateRoute/{id}', 'RatingController@rateRoute');
-    Route::get('/downloadWall', 'RouteController@downloadWall');
+    Route::get('/download/wall', 'RouteController@downloadWall');
     Route::get('/downloadRoute/{id}', 'RouteController@downloadRoute');
-    Route::get('/editRequest/{creditRequestID}', 'RequestController@editRequest');
-    Route::post('/storeRoute', 'RouteController@storeRoute') ;
-    Route::get('/createRoute', 'RouteController@createRoute');
+    Route::post('/store/route', 'RouteController@storeRoute') ;
+    Route::get('/create/route', 'RouteController@createRoute');
     Route::get('/approve/{id}', 'RouteController@approve');
     Route::get('/remove/{id}', 'RouteController@remove');
 });

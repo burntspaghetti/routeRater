@@ -17,10 +17,18 @@ use Intervention\Image\Response;
 
 class RouteController extends Controller
 {
-    public function routes()
+    public function routes($color=null)
     {
-        //get all routes with ratings
-        $routes = Route::all();
+
+        if(is_null($color))
+        {
+            $routes = Route::all();
+        }
+        else
+        {
+            $routes = Route::where('color', $color)->get();
+        }
+
         foreach($routes as $route)
         {
             $creator = User::find($route->user_id);
@@ -45,7 +53,7 @@ class RouteController extends Controller
             }
         }
 
-        return view('welcome', compact('routes'));
+        return view('welcome', compact('routes', 'color'));
     }
     
     

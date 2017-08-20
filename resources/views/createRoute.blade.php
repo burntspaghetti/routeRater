@@ -31,8 +31,9 @@
                                 {!! Form::label('color', 'Color:') !!}
                                 {!! Form::select('color', array('' => null,
                                                                 'Blue' => 'Blue',
-                                                                'White' => 'White',
+                                                                'Green' => 'Green',
                                                                 'Red' => 'Red',
+                                                                'White' => 'White',
                                                                 'Black' => 'Black',
                                                                 ), null, array('class' => 'form-control btn btn-default')) !!}
                                 {!! $errors->first('color', '<p class="text-danger" style="padding:1em;">:message</p>') !!}

@@ -115,7 +115,7 @@
                                                                         <div class="panel-body">
                                                                             {!! Form::open([ 'action' => 'RatingController@rateRoute', 'class' => '', 'style' => '']) !!}
                                                                             <div class="row">
-                                                                                @if(is_null($route->currentUserScore))
+                                                                                @if(is_null($route->currentUserRating))
                                                                                     <div class="col-md-12">
                                                                                         {!! Form::label('score', 'Your Rating:') !!}
                                                                                         {!! Form::select('score', array('' => null,
@@ -137,11 +137,11 @@
                                                                                                                         '3' => '3',
                                                                                                                         '4' => '4',
                                                                                                                         '5' => '5',
-                                                                                                                        ), $rating->score, array('class' => 'form-control btn btn-default')) !!}
+                                                                                                                        ), $route->currentUserRating, array('class' => 'form-control btn btn-default')) !!}
                                                                                         {!! $errors->first('score', '<p class="text-danger" style="padding:1em;">:message</p>') !!}
                                                                                     </div>
                                                                                     {!! Form::hidden('update', true) !!}
-                                                                                    {!! Form::hidden('rating_id', $rating->id) !!}
+                                                                                    {{--{!! Form::hidden('rating_id', $rating->id) !!}--}}
                                                                                 @endif
                                                                                 {!! Form::hidden('route_id', $route->id) !!}
                                                                             </div>

@@ -18,16 +18,20 @@ class RatingController extends Controller
      */
     public function rateRoute(Requests\RatingRequest $request)
     {
-        if($request->has('insert'))
+//        dd($request);
+        //try to find rating for the user id and route id
+
+        $rating = Rating::where('route_id', $request->route_id)->where('user_id', $request->user()->id)->first();
+
+        if(is_null($rating))
         {
             $rating = new Rating();
             $rating->score = $request->score;
             $rating->user_id = $request->user()->id;
             $rating->route_id = $request->route_id;
         }
-        elseif($request->has('update'))
+        else
         {
-            $rating = Rating::find($request->rating_id);
             $rating->score = $request->score;
         }
 

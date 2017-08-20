@@ -33,6 +33,7 @@ class RouteController extends Controller
         {
             $creator = User::find($route->user_id);
             $currentUserScore = Rating::where('user_id', Auth::user()->id)->where('route_id', $route->id)->first();
+//            dd($currentUserScore);
 
             if(!is_null($creator))
             {
@@ -52,6 +53,8 @@ class RouteController extends Controller
                 $route->currentUserRating = null;
             }
         }
+
+//        dd($routes);
 
         return view('welcome', compact('routes', 'color'));
     }

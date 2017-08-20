@@ -45,6 +45,7 @@ class RatingController extends Controller
         }
 
         $averageScore = $totalScore / $count;
+        $averageScore = round($averageScore, 1);
 
         $route->rating_count = $count;
         $route->rating = $averageScore;

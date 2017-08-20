@@ -34,8 +34,9 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 132px;">Name</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Average Rating: activate to sort column descending" style="width: 132px;">Average Rating</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rating Count: activate to sort column descending" style="width: 132px;">Rating Count</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Average Rating: activate to sort column descending" style="width: 132px;">Average Rating (Rating Count)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Created By: activate to sort column descending" style="width: 132px;">Created By</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Date Added: activate to sort column descending" style="width: 132px;">Date Added</th>
                                 @if(Auth::user()->role == 'admin')
                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Approve/Remove: activate to sort column descending" style="width: 132px;">Approve/Remove</th>
                                 @endif
@@ -164,8 +165,9 @@
                                                     </div>
                                                 </div>
                                         </td>
-                                        <td>{!! $route->rating !!}</td>
-                                        <td>{!! $route->rating_count !!}</td>
+                                        <td>{!! $route->rating !!} ({!! $route->rating_count !!})</td>
+                                        <td>{!! $route->creator !!}</td>
+                                        <td>{{ Carbon\Carbon::parse($route->created_at)->format('m-d-Y') }}</td>
                                     </tr>
                                 @elseif(Auth::user()->role == 'admin')
                                     <tr>
@@ -287,8 +289,10 @@
                                                     </div>
                                                 </div>
                                         </td>
-                                        <td>{!! $route->rating !!}</td>
-                                        <td>{!! $route->rating_count !!}</td>
+                                        <td>{!! $route->rating !!} ({!! $route->rating_count !!})</td>
+                                        <td>{!! $route->creator !!}</td>
+                                        <td>{{ Carbon\Carbon::parse($route->created_at)->format('m-d-Y') }}</td>
+
                                         <td>
                                             @if($route->approved === 'Yes')
                                                 <a href="{!! action('RouteController@remove', [$route->id]) !!}" class="btn btn-danger">Remove</a>

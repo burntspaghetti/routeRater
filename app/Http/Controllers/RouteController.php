@@ -82,7 +82,7 @@ class RouteController extends Controller
         $route->save();
         $path = public_path() . "/routes/" . $route->id . ".jpg";
 
-        Image::make($request->image)->orientate()->encode('jpg')->save($path, 6);
+        Image::make($request->image)->orientate()->encode('jpg')->save($path);
         $route->image_path = $path;
         $route->save();
 

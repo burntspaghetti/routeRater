@@ -28,7 +28,6 @@
 
                             <br>
                             <br>
-                        <p>Below you will find the route list. Click on the route name to view the route image and details.</p>
                         <a href="{!! action('RouteController@createRoute') !!}" class="btn btn-default">Create Route</a>
                         <table id="example" class="table table-striped table-bordered datatables-example dataTable" cellspacing="0" width="100%" id="DataTables_Table_0" role="grid" aria-describedby="applications" style="width: 100%;">
                             <thead>
@@ -58,7 +57,7 @@
                                                     {!! $route->name !!}
                                                 </button>
                                             @elseif($route->color == 'White')
-                                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#{!! $route->id !!}">
+                                                <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#{!! $route->id !!}">
                                                     {!! $route->name !!}
                                                 </button>
                                             @elseif($route->color == 'Red')
@@ -183,7 +182,7 @@
                                                     {!! $route->name !!}
                                                 </button>
                                             @elseif($route->color == 'White')
-                                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#{!! $route->id !!}">
+                                                <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#{!! $route->id !!}">
                                                     {!! $route->name !!}
                                                 </button>
                                             @elseif($route->color == 'Red')

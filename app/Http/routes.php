@@ -10,11 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/test', function()
-{
-    dd(phpinfo());
-    
-});
+//Route::get('/test', function()
+//{
+//    dd(phpinfo());
+//
+//});
 
 
 Route::group(array('middleware' => ['auth']), function()
@@ -26,8 +26,13 @@ Route::group(array('middleware' => ['auth']), function()
     Route::get('/downloadRoute/{id}', 'RouteController@downloadRoute');
     Route::post('/store/route', 'RouteController@storeRoute') ;
     Route::get('/create/route', 'RouteController@createRoute');
-    Route::get('/approve/{id}', 'RouteController@approve');
-    Route::get('/remove/{id}', 'RouteController@remove');
+
+    Route::group(array('middleware' => ['isAdmin']), function()
+    {
+        Route::get('/approve/{id}', 'RouteController@approve');
+        Route::get('/hide/{id}', 'RouteController@hide');
+        Route::get('/delete/{id}', 'RouteController@delete');
+    });
 });
 
 

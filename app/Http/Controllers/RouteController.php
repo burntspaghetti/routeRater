@@ -113,11 +113,19 @@ class RouteController extends Controller
         return redirect()->action('RouteController@routes');
     }
 
-    public function remove($id)
+    public function hide($id)
     {
         $route = \App\Route::find($id);
         $route->approved = 'No';
         $route->save();
+        return redirect()->action('RouteController@routes');
+    }
+
+    public function delete($id)
+    {
+        $route = \App\Route::find($id);
+        $route->delete();
+        session()->flash('success', 'Route deleted.');
         return redirect()->action('RouteController@routes');
     }
 

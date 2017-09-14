@@ -38,6 +38,7 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Date Added: activate to sort column descending" style="width: 132px;">Date Added</th>
                                 @if(Auth::user()->role == 'admin')
                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Approve/Remove: activate to sort column descending" style="width: 132px;">Approve/Remove</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Delete: activate to sort column descending" style="width: 132px;">Delete</th>
                                 @endif
                             </tr>
                             </thead>
@@ -294,11 +295,13 @@
 
                                         <td>
                                             @if($route->approved === 'Yes')
-                                                <a href="{!! action('RouteController@remove', [$route->id]) !!}" class="btn btn-danger">Remove</a>
+                                                {{--hides from users--}}
+                                                <a href="{!! action('RouteController@hide', [$route->id]) !!}" class="btn btn-danger">Hide</a>
                                             @elseif($route->approved === 'No')
                                                 <a href="{!! action('RouteController@approve', [$route->id]) !!}" class="btn btn-success">Approve</a>
                                             @endif
                                         </td>
+                                        <td><a href="{!! action('RouteController@delete', [$route->id]) !!}" class="btn btn-danger">Delete</a></td>
                                     </tr>
                                 @endif
                             @endforeach
